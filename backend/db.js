@@ -13,7 +13,11 @@ client.connect( (err) => {
         console.log('database NOT connected', err)
     } else {
         console.log(`connected with ${process.env.PGDATABASE} ...`)
+        console.log(client.database)
     }
 });
+
+
+
 
 module.exports = client;
