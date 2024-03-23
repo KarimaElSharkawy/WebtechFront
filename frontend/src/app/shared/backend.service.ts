@@ -7,6 +7,9 @@ import { Eintraege } from './eintraege';
   providedIn: 'root'
 })
 export class BackendService {
+  deleteEntry(id: number) {
+    throw new Error('Method not implemented.');
+  }
   backendUrl = 'http://localhost:4000';
   constructor(private http: HttpClient) { }
 

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, StartseiteComponent, MatFormFieldModule, MatInputModule, 
-    MatSelectModule, EintraegeComponent, NavComponent, ProfilComponent],
+    MatSelectModule, EintraegeComponent, NavComponent, ProfilComponent,CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] 
 })
