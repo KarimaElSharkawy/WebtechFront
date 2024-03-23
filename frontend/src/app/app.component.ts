@@ -7,11 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EintraegeComponent } from './eintraege/eintraege.component';
 import { NavComponent } from './nav/nav.component';
 import { CommonModule } from '@angular/common';
+import { ProfielComponent } from './profiel/profiel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, StartseiteComponent, MatFormFieldModule, MatInputModule, 
+  imports: [RouterOutlet, StartseiteComponent, ProfielComponent, MatFormFieldModule, MatInputModule, 
     MatSelectModule, EintraegeComponent, NavComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] 

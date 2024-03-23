@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { AppComponent } from './app.component';
 import { BackendService } from './shared/backend.service';
 import { AppRoutingModule } from './app.routes';
+import { ProfielComponent } from './profiel/profiel.component';
 
 
 
@@ -21,18 +22,22 @@ import { AppRoutingModule } from './app.routes';
     AppComponent,
     NavComponent,
     StartseiteComponent,
+    ProfielComponent,
     EintraegeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ProfielComponent,
     CommonModule,
     BackendService,
     HttpClient,
     RouterModule.forRoot([
       { path: 'startseite', component: StartseiteComponent },
       { path: 'eintraege', component: EintraegeComponent },
+      { path: 'profiel', component: ProfielComponent },
+
 
       { path: '', redirectTo: '/startseite', pathMatch: 'full' },
 

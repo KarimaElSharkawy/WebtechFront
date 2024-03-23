@@ -23,5 +23,7 @@ export class BackendService {
     return this.http.delete(`${this.backendUrl}/entries/${id}`);
   }
   
-
+  updateEntry(id: number, entry: Eintraege): Observable<any> {
+    return this.http.put(`${this.backendUrl}/entries/${id}`, entry);
+  }
 }
