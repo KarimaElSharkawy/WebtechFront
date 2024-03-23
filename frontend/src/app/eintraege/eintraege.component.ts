@@ -35,11 +35,11 @@ export class EintraegeComponent implements OnInit {
     this.bs.deleteEntry(id).subscribe({
       next: () => {
         console.log(`Eintrag mit ID ${id} wurde gelöscht.`);
-
         this.dataSource = this.dataSource.filter(eintrag => eintrag.id !== id);
         this.readAllEintraege(); 
       },
       error: (err) => console.error('Fehler beim Löschen des Eintrags:', err)
     });
   }
+  
 }

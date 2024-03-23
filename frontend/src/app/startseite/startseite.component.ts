@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet, RouterLink } from '@angular/router';
+import { Eintraege } from '../shared/eintraege';
+import { BackendService } from '../shared/backend.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-startseite',
@@ -24,15 +27,27 @@ import { RouterOutlet, RouterLink } from '@angular/router';
     AsyncPipe,
     RouterOutlet,
     RouterLink,
+    FormsModule,
     CommonModule
   ]
 })
 export class StartseiteComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  eintragText = '';
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  constructor(private backendService: BackendService) {}
+
+  addEntry() {
+    if (this.eintragText.trim()) {
+      const neuerEintrag: Eintraege = { eintraege: this.eintragText, datum: new Date() };
+      this.backendService.createOneEntry(neuerEintrag).subscribe({
+        next: (response) => {
+          console.log('Eintrag erfolgreich hinzugefügt', response);
+          this.eintragText = ''; // Textfeld leeren
+        },
+        error: (err) => console.error('Fehler beim Hinzufügen des Eintrags:', err),
+      });
+    } else {
+      console.log('Eintrag ist leer. Nichts zu speichern.');
+    }
+  }
 }

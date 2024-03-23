@@ -1,5 +1,5 @@
 export interface Eintraege {
-    id: number;
+    id?: number;
     eintraege: String;
     datum: Date;
 }
