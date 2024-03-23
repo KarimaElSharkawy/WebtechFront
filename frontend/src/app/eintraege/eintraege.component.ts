@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BackendService } from '../shared/backend.service'; 
 import { MatTableModule } from '@angular/material/table';
 import { Eintraege } from '../shared/eintraege';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 interface Eintrag {
   id: number;
@@ -13,7 +14,7 @@ interface Eintrag {
 @Component({
   selector: 'app-eintraege',
   standalone: true,
-  imports: [MatTableModule,CommonModule], 
+  imports: [MatTableModule,CommonModule, HttpClientModule], 
   templateUrl: './eintraege.component.html',
   styleUrls: ['./eintraege.component.css'] 
 })
