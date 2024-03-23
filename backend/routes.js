@@ -61,6 +61,24 @@ router.get('/entries/:id', async (req, res) => {
     }
 });
 
+router.delete('/entries/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const deleteQuery = `DELETE FROM eintraege WHERE id = $1 RETURNING *;`;
+        const deleteResult = await client.query(deleteQuery, [id]);
+        if (deleteResult.rowCount > 0) {
+            console.log(`Eintrag mit ID ${id} wurde gelöscht.`);
+            res.send({ message: `Eintrag mit ID ${id} erfolgreich gelöscht.` });
+        } else {
+            res.status(404).send({ message: `Eintrag mit ID ${id} nicht gefunden.` });
+        }
+    } catch (err) {
+        console.error(`Fehler beim Löschen des Eintrags: ${err}`);
+        res.status(500).send({ message: 'Fehler beim Löschen des Eintrags.' });
+    }
+});
+
+
 router.put('/entries/:id', async (req, res) => {
     const id = req.params.id;
 

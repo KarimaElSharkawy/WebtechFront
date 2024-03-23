@@ -3,7 +3,6 @@
     <div class="col-md-12 px-0">
       <h1 class="display-4 font-italic">Meine Einträge</h1>
       
-      <!-- Tabelle innerhalb des .jumbotron Containers -->
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length > 0; else noEntries">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID </th>

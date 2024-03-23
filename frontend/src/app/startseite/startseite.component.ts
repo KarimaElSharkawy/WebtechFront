@@ -42,7 +42,7 @@ export class StartseiteComponent {
       this.backendService.createOneEntry(neuerEintrag).subscribe({
         next: (response) => {
           console.log('Eintrag erfolgreich hinzugefügt', response);
-          this.eintragText = ''; // Textfeld leeren
+          this.eintragText = ''; 
         },
         error: (err) => console.error('Fehler beim Hinzufügen des Eintrags:', err),
       });

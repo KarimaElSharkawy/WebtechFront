@@ -11,6 +11,7 @@ import { EintraegeComponent } from './eintraege/eintraege.component';
 import { NavComponent } from './nav/nav.component';
 import { AppComponent } from './app.component';
 import { BackendService } from './shared/backend.service';
+import { AppRoutingModule } from './app.routes';
 
 
 
@@ -25,6 +26,7 @@ import { BackendService } from './shared/backend.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     CommonModule,
     BackendService,
     HttpClient,

@@ -22,5 +22,6 @@ export class BackendService {
   deleteEntry(id: number): Observable<any> {
     return this.http.delete(`${this.backendUrl}/entries/${id}`);
   }
+  
 
 }
