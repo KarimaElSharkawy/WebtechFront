@@ -1,46 +1,45 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { BackendService } from '../shared/backend.service'; 
+import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { BackendService } from '../shared/backend.service'; 
 import { Eintraege } from '../shared/eintraege';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-interface Eintrag {
-  id: number;
-  datum: string;
-  eintraege: string;
-}
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-eintraege',
   standalone: true,
-  imports: [MatTableModule,CommonModule, HttpClientModule], 
+  imports: [MatTableModule, CommonModule],
   templateUrl: './eintraege.component.html',
-  styleUrls: ['./eintraege.component.css'] 
+  styleUrls: ['./eintraege.component.css']
 })
 export class EintraegeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'datum', 'eintraege']; 
-  dataSource: Eintraege[] = []; 
+  displayedColumns: string[] = ['id', 'eintraege', 'datum', 'delete'];
+  dataSource: Eintraege[] = [];
+
+  constructor(private bs: BackendService) {} 
 
   ngOnInit(): void {
-    this.readAllEintraege(); 
+    this.readAllEintraege();
   }
-  
-  bs = inject(BackendService); 
 
   readAllEintraege() {
     this.bs.getAllEntries().subscribe({
       next: (response) => {
-        console.log(response);
         this.dataSource = response; 
       },
-      error: (err) => console.log(err),
+      error: (err) => console.error('Fehler beim Abrufen der Einträge:', err),
       complete: () => console.log('Abrufen aller Einträge abgeschlossen')
     });
   }
 
   deleteEntry(id: number) {
-    console.log(`Löschen des Eintrags mit ID: ${id}`);
-    
+    this.bs.deleteEntry(id).subscribe({
+      next: () => {
+        console.log(`Eintrag mit ID ${id} wurde gelöscht.`);
+
+        this.dataSource = this.dataSource.filter(eintrag => eintrag.id !== id);
+        this.readAllEintraege(); 
+      },
+      error: (err) => console.error('Fehler beim Löschen des Eintrags:', err)
+    });
   }
 }

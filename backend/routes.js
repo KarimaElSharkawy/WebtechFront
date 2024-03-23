@@ -27,7 +27,7 @@ router.post('/addEntry', async (req, res) => {
 });
 
 router.get('/entries', async (req, res) => {
-    const query = `SELECT * FROM eintraege;`;
+    const query = `SELECT * FROM public.eintraege;`;
 
     try {
         const result = await client.query(query);
@@ -39,8 +39,13 @@ router.get('/entries', async (req, res) => {
     }
 });
 
+router.get('/users', async (req, res) => {
+    const query = `SELECT * FROM users;`; // Anstatt `eintraege`
+    // Restliche Implementierung...
+});
+
 router.get('/entries/:id', async (req, res) => {
-    const query = `SELECT * FROM eintraege WHERE id=$1;`;
+    const query = `SELECT * FROM public.eintraege WHERE id=$1;`;
 
     try {
         const id = req.params.id;
@@ -59,7 +64,7 @@ router.get('/entries/:id', async (req, res) => {
 router.put('/entries/:id', async (req, res) => {
     const id = req.params.id;
 
-    const checkQuery = `SELECT * FROM eintraege WHERE id=$1;`;
+    const checkQuery = `SELECT * FROM public.eintraege WHERE id=$1;`;
     try {
         const checkResult = await client.query(checkQuery, [id]);
         if (checkResult.rowCount > 0) {

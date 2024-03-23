@@ -6,11 +6,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
-import { StartseiteComponent } from './startseite.component';
-import { EintraegeComponent } from '../eintraege/eintraege.component';
-import { NavComponent } from '../nav/nav.component';
-import { AppComponent } from '../app.component';
-import { BackendService } from '../shared/backend.service';
+import { StartseiteComponent } from './startseite/startseite.component';
+import { EintraegeComponent } from './eintraege/eintraege.component';
+import { NavComponent } from './nav/nav.component';
+import { AppComponent } from './app.component';
+import { BackendService } from './shared/backend.service';
 
 
 
