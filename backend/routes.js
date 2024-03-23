@@ -38,11 +38,23 @@ router.get('/entries', async (req, res) => {
         res.status(500).send({ message: 'Fehler beim Abrufen der Einträge.' });
     }
 });
-
+// Profiel------------------------------------------------------------------------------------------------------------------------------------------------------
 router.get('/users', async (req, res) => {
-    const query = `SELECT * FROM users;`; // Anstatt `eintraege`
-    // Restliche Implementierung...
+    const query = `SELECT * FROM users;`; 
 });
+
+router.post('/users', async (req, res) => {
+    const { vorname, nachname, email } = req.body;
+    try {
+        const insertQuery = `INSERT INTO users (vorname, nachname, email) VALUES ($1, $2, $3) RETURNING *;`;
+        const result = await client.query(insertQuery, [vorname, nachname, email]);
+        res.status(201).send(result.rows[0]);
+    } catch (error) {
+        console.error('Fehler beim Speichern des Benutzerprofils', error);
+        res.status(500).send({ message: 'Fehler beim Speichern des Benutzerprofils' });
+    }
+});
+// Profiel------------------------------------------------------------------------------------------------------------------------------------------------------
 
 router.get('/entries/:id', async (req, res) => {
     const query = `SELECT * FROM public.eintraege WHERE id=$1;`;

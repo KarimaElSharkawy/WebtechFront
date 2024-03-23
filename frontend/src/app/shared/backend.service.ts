@@ -26,4 +26,13 @@ export class BackendService {
   updateEntry(id: number, entry: Eintraege): Observable<any> {
     return this.http.put(`${this.backendUrl}/entries/${id}`, entry);
   }
+
+  createUserProfile(profile: any): Observable<any> {
+    return this.http.post(`${this.backendUrl}/users`, profile);
+  }
+  
+  getUserProfile(): Observable<any> {
+    return this.http.get(`${this.backendUrl}/users`);
+  }
+  
 }
