@@ -8,12 +8,13 @@ import { EintraegeComponent } from './eintraege/eintraege.component';
 import { NavComponent } from './nav/nav.component';
 import { CommonModule } from '@angular/common';
 import { ProfielComponent } from './profiel/profiel.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, StartseiteComponent, ProfielComponent, MatFormFieldModule, MatInputModule, 
-    MatSelectModule, EintraegeComponent, NavComponent],
+    MatSelectModule, EintraegeComponent, NavComponent, MatSnackBarModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] 
 })

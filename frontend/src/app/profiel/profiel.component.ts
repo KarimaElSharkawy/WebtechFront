@@ -9,9 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { Eintraege } from '../shared/eintraege';
 import { BackendService } from '../shared/backend.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-startseite',
@@ -28,14 +28,16 @@ import { FormsModule } from '@angular/forms';
     RouterOutlet,
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    MatSnackBarModule
   ]
 })
 export class ProfielComponent implements OnInit {
   profile: any = {};
   profileSaved = false;
 
-  constructor(private backendService: BackendService) {}
+  constructor(private backendService: BackendService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -55,8 +57,18 @@ export class ProfielComponent implements OnInit {
       next: () => {
         console.log('Profil gespeichert');
         this.profileSaved = true;
+
+        this.snackBar.open('Profil aktualisiert', 'Schließen', {
+          duration: 3000,
+        });
       },
-      error: (err) => console.error('Fehler beim Speichern des Profils:', err)
+      error: (err) => {
+        console.error('Fehler beim Speichern des Profils:', err);
+
+        this.snackBar.open('Fehler beim Speichern des Profils', 'Schließen', {
+          duration: 3000,
+        });
+      }
     });
   }
 }
