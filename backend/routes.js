@@ -103,7 +103,18 @@ router.put('/entries/:id', async (req, res) => {
 
 // Profiel------------------------------------------------------------------------------------------------------------------------------------------------------
 router.get('/users', async (req, res) => {
-    const query = `SELECT * FROM users;`; 
+    const query = `SELECT * FROM users;`;
+    try {
+        const result = await client.query(query);
+        if (result.rows.length === 0) {
+            res.status(200).send({});
+        } else {
+            res.status(200).send(result.rows[0]);
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen des Benutzerprofils', error);
+        res.status(500).send({ message: 'Fehler beim Abrufen des Benutzerprofils' });
+    }
 });
 
 router.post('/users', async (req, res) => {
@@ -117,6 +128,18 @@ router.post('/users', async (req, res) => {
         res.status(500).send({ message: 'Fehler beim Speichern des Benutzerprofils' });
     }
 });
+
+router.delete('/users', async (req, res) => {
+    try {
+        const deleteQuery = `DELETE FROM users;`; 
+        await client.query(deleteQuery);
+        res.status(200).send({ message: 'Alle Benutzerdaten wurden gelöscht.' });
+    } catch (error) {
+        console.error('Fehler beim Löschen der Benutzerdaten', error);
+        res.status(500).send({ message: 'Fehler beim Löschen der Benutzerdaten' });
+    }
+});
+
 // Profiel------------------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = router;

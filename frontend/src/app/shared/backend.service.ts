@@ -34,5 +34,7 @@ export class BackendService {
   getUserProfile(): Observable<any> {
     return this.http.get(`${this.backendUrl}/users`);
   }
-  
+  clearUserProfile(): Observable<any> {
+    return this.http.delete(`${this.backendUrl}/users`);
+}
 }

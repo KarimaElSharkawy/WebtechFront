@@ -1,30 +1,33 @@
 
 
-
-
 <div class="container profiel-container">
-    <div class="jumbotron profiel-jumbotron">
-        <h1>Profiel</h1>
-        <form class="profiel-form">
-            <div class="form-group">
-                <label for="vorname">Vorname:</label>
-            </div>
-            <div class="form-group">
-                <label for="nachname">Nachname:</label>
-            </div>
-            <div class="form-group">
-                <label for="email">E-mail:</label>
-            </div>
-            <button type="button" class="btn btn-primary" (click)="saveProfile()">Bearbeiten</button>
-        </form>
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <h1 class="display-4 font-italic">Profil</h1>
+        <table class="table table-dark">
+          <tbody>
+            <tr>
+              <th scope="row">Vorname</th>
+              <td>{{profile.vorname}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Nachname</th>
+              <td>{{profile.nachname}}</td>
+            </tr>
+            <tr>
+              <th scope="row">E-mail</th>
+              <td>{{profile.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+            <button type="button" class="btn btn-primary" (click)="clearProfileData()">Bearbeiten</button>
     </div>
 </div>
 
 
 
 
-<div class="container">
-    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+<div class="container" *ngIf="!profileLoaded">
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <h1>Profiel</h1>
         <div class="row">
             <div class="col-sm-4">
@@ -49,3 +52,4 @@
         </div>
     </div>
 </div>
+

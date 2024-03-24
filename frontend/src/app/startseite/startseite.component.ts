@@ -12,6 +12,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 import { Eintraege } from '../shared/eintraege';
 import { BackendService } from '../shared/backend.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-startseite',
@@ -28,13 +29,14 @@ import { FormsModule } from '@angular/forms';
     RouterOutlet,
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatSnackBarModule
   ]
 })
 export class StartseiteComponent {
   eintragText = '';
 
-  constructor(private backendService: BackendService) {}
+  constructor(private backendService: BackendService, private snackBar: MatSnackBar) {}
 
   addEntry() {
     if (this.eintragText.trim()) {
@@ -42,8 +44,12 @@ export class StartseiteComponent {
       this.backendService.createOneEntry(neuerEintrag).subscribe({
         next: (response) => {
           console.log('Eintrag erfolgreich hinzugefügt', response);
+          this.snackBar.open('Beitrag hinzugefügt', 'Schließen', {
+            duration: 3000,
+          });
           this.eintragText = ''; 
         },
+        
         error: (err) => console.error('Fehler beim Hinzufügen des Eintrags:', err),
       });
     } else {
