@@ -55,7 +55,6 @@ export class ProfielComponent implements OnInit {
       next: () => {
         console.log('Profil gespeichert');
         this.profileSaved = true;
-        // Zusätzliche Logik nach Bedarf...
       },
       error: (err) => console.error('Fehler beim Speichern des Profils:', err)
     });
