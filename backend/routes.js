@@ -129,6 +129,35 @@ router.post('/users', async (req, res) => {
     }
 });
 
+router.put('/entries/:id', async (req, res) => {
+    const { id } = req.params;
+    const { eintraege, datum } = req.body;
+
+    if (!eintraege || !datum) {
+        return res.status(400).send({ message: 'Eintrag und Datum sind erforderlich.' });
+    }
+
+    try {
+        const updateQuery = `
+            UPDATE eintraege 
+            SET eintraege = $1, datum = $2
+            WHERE id = $3
+            RETURNING *;
+        `;
+        const result = await client.query(updateQuery, [eintraege, datum, id]);
+
+        if (result.rows.length > 0) {
+            res.send(result.rows[0]);
+        } else {
+            res.status(404).send({ message: 'Eintrag nicht gefunden.' });
+        }
+    } catch (err) {
+        console.error('Fehler beim Aktualisieren des Eintrags:', err);
+        res.status(500).send({ message: 'Fehler beim Aktualisieren des Eintrags.' });
+    }
+});
+
+
 router.delete('/users', async (req, res) => {
     try {
         const deleteQuery = `DELETE FROM users;`; 

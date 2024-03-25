@@ -22,10 +22,6 @@ export class BackendService {
   deleteEntry(id: number): Observable<any> {
     return this.http.delete(`${this.backendUrl}/entries/${id}`);
   }
-  
-  updateEntry(id: number, entry: Eintraege): Observable<any> {
-    return this.http.put(`${this.backendUrl}/entries/${id}`, entry);
-  }
 
   createUserProfile(profile: any): Observable<any> {
     return this.http.post(`${this.backendUrl}/users`, profile);
@@ -36,5 +32,8 @@ export class BackendService {
   }
   clearUserProfile(): Observable<any> {
     return this.http.delete(`${this.backendUrl}/users`);
+}
+updateEntry(id: number, entry: Eintraege): Observable<Eintraege> {
+  return this.http.put<Eintraege>(`${this.backendUrl}/entries/${id}`, entry);
 }
 }

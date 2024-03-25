@@ -47,13 +47,13 @@ export class ProfielComponent implements OnInit {
   loadUserProfile() {
     this.backendService.getUserProfile().subscribe({
       next: (profile) => {
-        // Überprüfe, ob das Profil Objekt Daten enthält
+
         this.profileLoaded = Object.keys(profile).length > 0;
         if (this.profileLoaded) {
           this.profile = profile;
         } else {
           console.log('Keine Profildaten vorhanden.');
-          // Optionale Logik für den Fall, dass keine Daten vorhanden sind
+
         }
       },
       error: (err) => console.error('Fehler beim Laden des Benutzerprofils:', err),
@@ -66,7 +66,7 @@ export class ProfielComponent implements OnInit {
         console.log('Alle Benutzerdaten wurden gelöscht.');
         this.profile = {};
         this.profileLoaded = false;
-        this.snackBar.open('Alle Benutzerdaten wurden gelöscht.', 'Schließen', {
+        this.snackBar.open('Benutzerdaten wurden gelöscht.', 'Schließen', {
           duration: 3000,
         });
       },
@@ -77,16 +77,16 @@ export class ProfielComponent implements OnInit {
   saveProfile() {
     this.backendService.createUserProfile(this.profile).subscribe({
       next: () => {
-        console.log('Profil gespeichert');
-        this.profileSaved = true; // Diese Variable könnte genutzt werden, um Feedback im UI zu geben
-        this.snackBar.open('Profil aktualisiert', 'Schließen', {
+        console.log('Profiel gespeichert');
+        this.profileSaved = true; 
+        this.snackBar.open('Profiel aktualisiert', 'Schließen', {
           duration: 3000,
         });
-        setTimeout(() => location.reload(), 3000); // Seite neu laden, um die aktualisierten Daten zu sehen
+        setTimeout(() => location.reload(), 3000); 
       },
       error: (err) => {
-        console.error('Fehler beim Speichern des Profils:', err);
-        this.snackBar.open('Fehler beim Speichern des Profils', 'Schließen', {
+        console.error('Fehler beim Speichern des Profiels:', err);
+        this.snackBar.open('Fehler beim Speichern des Profiels', 'Schließen', {
           duration: 3000,
         });
       }

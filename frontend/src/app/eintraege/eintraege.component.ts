@@ -3,17 +3,20 @@ import { MatTableModule } from '@angular/material/table';
 import { BackendService } from '../shared/backend.service'; 
 import { Eintraege } from '../shared/eintraege';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-eintraege',
   standalone: true,
-  imports: [MatTableModule, CommonModule],
+  imports: [MatTableModule, CommonModule, FormsModule],
   templateUrl: './eintraege.component.html',
   styleUrls: ['./eintraege.component.css']
 })
 export class EintraegeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'eintraege', 'datum', 'delete'];
+  displayedColumns: string[] = ['id', 'eintraege', 'datum', 'edit', 'delete'];
   dataSource: Eintraege[] = [];
+  editingEntry: Eintraege | null = null;
+  editText: String = '';
 
   constructor(private bs: BackendService) {} 
 
@@ -40,6 +43,28 @@ export class EintraegeComponent implements OnInit {
       },
       error: (err) => console.error('Fehler beim Löschen des Eintrags:', err)
     });
+  }
+  
+  startEdit(entry: Eintraege): void {
+    this.editingEntry = entry;
+    this.editText = entry.eintraege;
+  }
+
+  updateEntry(): void {
+
+    if (this.editingEntry) {
+      this.bs.updateEntry(this.editingEntry.id!, { ...this.editingEntry, eintraege: this.editText }).subscribe({
+        next: () => {
+          console.log(`Eintrag mit ID ${this.editingEntry!.id} wurde aktualisiert.`);
+          this.editingEntry = null;
+          this.editText = '';
+          this.readAllEintraege(); 
+        },
+        error: (err) => console.error('Fehler beim Aktualisieren des Eintrags:', err)
+      });
+    } else {
+      console.error('EditingEntry ist null.');
+    }
   }
   
 }
