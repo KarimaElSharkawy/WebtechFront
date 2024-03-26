@@ -1,25 +1,38 @@
 .container {
-    max-width: 90%;
-  }
-  
-  .blog-header {
-    line-height: 1;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  
-  .blog-header-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.25rem;
-  }
-  
-  .jumbotron {
-    background-color: #343a40;
-    color: white;
-    margin-bottom: 50px;
-    max-width: 90%;
+  max-width: 90%;
+}
 
-  }
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 2.25rem;
+  color: #333;
+}
+
+.nav-scroller {
+  box-shadow: inset 0 -1px 2px rgba(0,0,0,.1);
+}
+
+ .jumbotron {
+  background-color: #343a40;
+  color: white;
   
-  .abstand{
-    height: 10%;
-  }
+
+}
+
+.form-group textarea {
+  height: 200px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.abstand{
+  height: 10%;
+}
