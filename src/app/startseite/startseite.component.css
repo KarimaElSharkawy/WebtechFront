@@ -1,6 +1,5 @@
  .container {
   max-width: 90%;
-  margin-bottom: 100px;
 
 }
 
@@ -35,3 +34,6 @@
   border-color: #007bff;
 }
 
+.abstand{
+  height: 10%;
+}
