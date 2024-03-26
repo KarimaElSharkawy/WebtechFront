@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container ">
   <div *ngIf="editingEntry" class="mb-3">
-    <textarea [(ngModel)]="editText" class="form-control" style="margin-bottom: 10px;"></textarea>
+    <textarea [(ngModel)]="editText" class="form-control" style="height: 200px; margin-bottom: 20px;" ></textarea>
     <button type="button" class="btn btn-success" (click)="updateEntry()">Speichern</button>
   </div>
 
@@ -27,14 +27,20 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef> Bearbeiten </th>
           <td mat-cell *matCellDef="let element">
-            <button type="button" class="btn btn-warning" (click)="startEdit(element)">Bearbeiten</button>
+
+            <button mat-icon-button (click)="startEdit(element)" style="border: none; background: none;">
+              <mat-icon>edit</mat-icon>
+            </button>
+          
           </td>
         </ng-container>
         
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef> Löschen </th>
           <td mat-cell *matCellDef="let element">
-            <button type="button" class="btn btn-primary" (click)="deleteEntry(element.id)">Löschen</button>
+            <button mat-icon-button (click)="deleteEntry(element.id)"style="border: none; background: none;">
+              <mat-icon>delete</mat-icon>
+            </button>          
           </td>
         </ng-container>
         
