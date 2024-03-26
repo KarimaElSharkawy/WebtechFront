@@ -1,13 +1,14 @@
 
-<div class="container">
-  <div *ngIf="editingEntry" class="mb-3">
-    <textarea [(ngModel)]="editText" class="form-control" style="margin-bottom: 10px;"></textarea>
-    <button type="button" class="btn btn-success" (click)="updateEntry()">Speichern</button>
-  </div>
+
   <div class="eintraegeContainer">
   <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
     <div class="col-md-12 px-0">
-      <h1 class="display-4 font-italic">Meine Einträge</h1>
+      <h1 class="display-4 ">Meine Einträge</h1>
+      <div class="container">
+        <div *ngIf="editingEntry" class="mb-3">
+          <textarea [(ngModel)]="editText" class="form-control" style="margin-bottom: 10px;"></textarea>
+          <button type="button" class="btn btn-success" (click)="updateEntry()">Speichern</button>
+        </div>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length > 0; else noEntries">
 
         <ng-container matColumnDef="id">
