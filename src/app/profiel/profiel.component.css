@@ -15,7 +15,10 @@
   .jumbotron {
     background-color: #343a40;
     color: white;
-    margin-bottom: 50px;
+  }
+  .profiel-container{
+    margin-bottom: 100px;
+
   }
   
   
