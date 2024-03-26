@@ -20,6 +20,8 @@
  .jumbotron {
   background-color: #343a40;
   color: white;
+  margin-bottom: 50px;
+
 }
 
 .form-group textarea {
