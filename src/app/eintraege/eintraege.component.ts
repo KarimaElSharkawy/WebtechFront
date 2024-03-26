@@ -4,11 +4,12 @@ import { BackendService } from '../shared/backend.service';
 import { Eintraege } from '../shared/eintraege';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-eintraege',
   standalone: true,
-  imports: [MatTableModule, CommonModule, FormsModule],
+  imports: [MatTableModule, CommonModule, FormsModule, MatIcon],
   templateUrl: './eintraege.component.html',
   styleUrls: ['./eintraege.component.css']
 })
